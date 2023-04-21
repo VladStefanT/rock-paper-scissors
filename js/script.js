@@ -38,7 +38,7 @@ function validateInput(choice) {
     return choices.includes(choice);
 }
 
-// Function to check winner by comparing player's choice and computer's choice by looping through all options
+// Function to checkWinner by comparing player's choice and computer's choice by looping through all options
 
 function checkWinner(choiceP, choiceC) {
     if ((choiceP == 'rock' && choiceC == 'scissors') || (choiceP == 'paper'  && choiceC == 'rock') || (choiceP == 'scissors' && choiceC == 'paper')) {
