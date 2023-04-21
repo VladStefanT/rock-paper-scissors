@@ -45,12 +45,12 @@ function validateInput(choice) {
 // Function to checkWinner by comparing player's choice and computer's choice by looping through all options
 
 function checkWinner(choiceP, choiceC) {
-    if ((choiceP == 'rock' && choiceC == 'scissors') || (choiceP == 'paper'  && choiceC == 'rock') || (choiceP == 'scissors' && choiceC == 'paper')) {
-        return 'Player wins';
-    } else if ((choiceP == 'rock' && choiceC == 'paper') || (choiceP == 'paper' && choiceC == 'scissors') || (choiceP == 'scissors' && choiceC == 'rock')) {
-        return 'Computer wins';
-    } else {
+    if (choiceP == choiceC) {
         return 'Tie';
+    } else if ((choiceP == 'rock' && choiceC == 'scissors') || (choiceP == 'paper'  && choiceC == 'rock') || (choiceP == 'scissors' && choiceC == 'paper')) {
+        return 'Player wins';
+    } else {
+        return 'Computer wins';
     }
 }
 
