@@ -3,7 +3,10 @@ const choices = ["rock", "paper", "scissors"];
 function game() {
     // This is the main function
     // 5 Round 
-    playRound();
+    for (let i = 0; i < 5; i++){
+        playRound();
+        console.log(`Round ${i + 1}`);
+    }
 }
 
 function playRound() {
@@ -54,4 +57,4 @@ function checkWinner(choiceP, choiceC) {
     }
 }
 
-game();
+//game();
