@@ -1,4 +1,3 @@
-console.log("Hello world");
 const choices = ["rock", "paper", "scissors"];
 
 function game() {
@@ -10,6 +9,9 @@ function game() {
 function playRound() {
     const playerSelection = playerChoice();
     const computerSelection = computerChoice();
+    console.log(`Computer chose: ${computerSelection}`);
+    const winner = checkWinner(playerSelection, computerSelection);
+    console.log(`Result is: ${winner}`);
 }
 
 function playerChoice() {
@@ -21,13 +23,15 @@ function playerChoice() {
     input = input.toLowerCase();
     let check = validateInput(input);
     while (check == false) {
-        input =prompt("Type rock, paper or scissors: ");
+        input =prompt("Type rock, paper or scissors( Spelling needs to be identical): ");
         while ( input == null) {
             input = prompt("Type rock, paper or scissors: ");
         }
         input = input.toLocaleLowerCase();
         check = validateInput(input);
     }
+    console.log(`Player chose: ${input}`);
+    return input;
 }
 
 function computerChoice() {
@@ -42,9 +46,9 @@ function validateInput(choice) {
 
 function checkWinner(choiceP, choiceC) {
     if ((choiceP == 'rock' && choiceC == 'scissors') || (choiceP == 'paper'  && choiceC == 'rock') || (choiceP == 'scissors' && choiceC == 'paper')) {
-        return 'Player';
+        return 'Player wins';
     } else if ((choiceP == 'rock' && choiceC == 'paper') || (choiceP == 'paper' && choiceC == 'scissors') || (choiceP == 'scissors' && choiceC == 'rock')) {
-        return 'Computer';
+        return 'Computer wins';
     } else {
         return 'Tie';
     }
