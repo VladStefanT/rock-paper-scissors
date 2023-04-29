@@ -1,60 +1,70 @@
 const choices = ["rock", "paper", "scissors"];
+let playerScore = 0;
+let cpuScore = 0;
+let tieCount = 0;
+const rockBtn = document.getElementById("rockBtn");
+const paperBtn = document.getElementById("paperBtn");
+const scissorsBtn = document.getElementById("scissorsBtn");
+const pScorePara = document.querySelector('.playerScore');
+const cScorePara = document.querySelector('.computerScore');
+const tiePara = document.querySelector('.tieCount');
+const restults = document.querySelector('.results');
 
-function game() {
-    // This is the main function
-    // 5 Round 
-    for (let i = 0; i < 5; i++){
-        playRound();
-        console.log(`Round ${i + 1}`);
-    }
-}
 
-function playRound() {
-    const playerSelection = playerChoice();
-    const computerSelection = computerChoice();
-    console.log(`Computer chose: ${computerSelection}`);
-    const winner = checkWinner(playerSelection, computerSelection);
-    console.log(`Result is: ${winner}`);
-}
 
-function playerChoice() {
-    // get input from player
-    let input = prompt("Type rock, paper or scissors: ");
-    while ( input == null) {
-        input = prompt("Type rock, paper or scissors: ");
-    }
-    input = input.toLowerCase();
-    let check = validateInput(input);
-    while (check == false) {
-        input =prompt("Type rock, paper or scissors( Spelling needs to be identical): ");
-        while ( input == null) {
-            input = prompt("Type rock, paper or scissors: ");
-        }
-        input = input.toLocaleLowerCase();
-        check = validateInput(input);
-    }
-    console.log(`Player chose: ${input}`);
-    return input;
-}
-
-function computerChoice() {
+function cpuChoice() {
     return choices[Math.floor(Math.random()*choices.length)];
 }
 
-function validateInput(choice) {
-    return choices.includes(choice);
-}
 
-// Function to checkWinner by comparing player's choice and computer's choice by looping through all options
+rockBtn.addEventListener('click', function() {
+    playRound('rock', cpuChoice());
+});
 
-function checkWinner(choiceP, choiceC) {
-    if (choiceP == choiceC) {
-        return 'Tie';
-    } else if ((choiceP == 'rock' && choiceC == 'scissors') || (choiceP == 'paper'  && choiceC == 'rock') || (choiceP == 'scissors' && choiceC == 'paper')) {
-        return 'Player wins';
-    } else {
-        return 'Computer wins';
+paperBtn.addEventListener('click', function() {
+    playRound('paper', cpuChoice());
+});
+
+scissorsBtn.addEventListener('click', function() {
+    playRound('scissors', cpuChoice());
+});
+
+
+function endGame() {
+    if ( playerScore === 5) {
+        pScorePara.innerText = `You: ${playerScore}`;
+        restults.innerText = 'Result: You won!';
+    } else if (cpuScore === 5) {
+        cScorePara.innerText = `Computer: ${cpuScore}`;
+        restults.innerText = 'Result: You lost';
+    } else if (tieCount === 5){
+        tiePara.innerText = `Tie: ${tieCount}`;
+        restults.innerText = 'Result: Tie!!';
     }
 }
 
-//game();
+
+function playRound(playerSelection, cpuSelection) {
+    if (playerScore < 5 && cpuScore < 5 && tieCount < 5) {
+        console.log('1', playerSelection, '2', cpuSelection);
+        if (playerSelection == cpuSelection) {
+            tieCount++;
+            tiePara.innerText = `Tie: ${tieCount}`;
+        } else if ((playerSelection == 'rock' && cpuSelection == 'scissors') || (playerSelection == 'paper'  && cpuSelection == 'rock') || (playerSelection == 'scissors' && cpuSelection == 'paper')) {
+            playerScore++;
+            pScorePara.innerText = `You: ${playerScore}`;
+        } else {
+            cpuScore++;
+            cScorePara.innerText = `Computer: ${cpuScore}`;
+        }
+    }
+    endGame();
+    return;
+}
+
+
+
+
+
+
+
